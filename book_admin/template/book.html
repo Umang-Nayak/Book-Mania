@@ -1,0 +1,83 @@
+{% extends 'admin_header.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Main Content -->
+<div class="main-content">
+    <section class="section">
+        <div class="section-header">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="section-header-breadcrumb-content-chart float-right">
+                        <h1>Book</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Book Table</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                                    <thead>
+                                    <tr>
+                                        <th>Book<br/>ID</th>
+                                        <th>Book<br/>Name</th>
+                                        <th>Book<br/>Price</th>
+                                        <th>Book<br/>Quantity</th>
+                                        <th>Book<br/>Image</th>
+                                        <th>Book<br/>Description</th>
+                                        <th>Sub_category<br/>Name</th>
+                                        <th>Language<br/>Name</th>
+                                        <th>Book<br/>Owner</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for data in b %}
+
+                                    <tr>
+                                        <td>{{data.b_id}}</td>
+                                        <td>{{data.b_name}}</td>
+                                        <td>{{data.b_price}}</td>
+                                        <td>{{data.b_qty}}</td>
+                                        <td>
+                                            <img src="{% static 'assets/img/' %}{{data.b_img}}" height="100px" width="80px" />
+                                            <a href="/update_image/{{data.b_id}}"><i class="fas fa-sync"></i></a>
+                                        </td>
+                                        <td>{{data.b_des}}</td>
+                                        <td>{{data.s_id.s_name}}</td>
+                                        <td>{{data.l_id.l_name}}</td>
+                                        <td>
+                                            {% if data.u_id_id > 0 %}
+                                                <div class="alert alert-primary">{{data.u_id.u_fname}} {{data.u_id.u_lname}}</div>
+                                            {% else %}
+                                                <div class="alert alert-dark">New Book</div>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a href="/d_book/{{data.b_id}}"><i class="fas fa-trash"></i></a>
+                                            &nbsp; /&nbsp;
+                                            <a href="/update_book/{{data.b_id}}"><i class="fas fa-sync-alt"></i></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="/bi/" class="badge badge-primary">Insert Book</a>
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% load static %}
+{% for x in p %}
+
+<div class="col-book style-2">
+    <div class="dz-shop-card style-1">
+        <div class="dz-media">
+            <img src="{% static 'assets/img/' %}{{x.b_img}}" alt="book">
+        </div>
+        <form method="POST" action="/c/cl_wishlist/">
+            {% csrf_token %}
+            <div class="bookmark-btn style-2">
+                <input type="hidden" name="b_id" value="{{x.b_id}}">
+                <button type="submit" class="form-check-label">
+                    {% if x.b_id in w %}
+                    <i class='fas fa-heart' style='color: red'></i>
+                    {% else %}
+                    <i class="flaticon-heart"></i>
+                    {% endif %}
+                </button>
+            </div>
+        </form>
+        <div class="dz-content">
+            <h5 class="title"><a href="/c/cdetail/{{x.b_id}}">{{x.b_name}}</a></h5>
+            <ul class="dz-tags">
+                <li><a href="{% static 'books-grid-view.html' %}">{{x.s_id.s_name}}</a></li>
+            </ul>
+            <div class="book-footer">
+                <form method="post" action="/c/insert_cart/{{x.b_id}}">
+                    {% csrf_token %}
+                    <br/>
+                    <h5 class="title"><a href="/c/cdetail/{{x.b_id}}">{{x.b_name}}</a></h5>
+                    <div class="price">
+                        <span class="price-num">₹ {{x.b_price}}</span>
+                    </div>
+                    <input type="hidden" name="b_id" value="{{x.b_id}}">
+                    <input type="hidden" name="b_qty" value="1">
+                    <input type="hidden" name="price" value="{{x.b_price}}"/>
+                    <button class="btn btn-secondary box-btn btnhover btnhover2"><i
+                            class="flaticon-shopping-cart-1 m-r10"></i> Add to cart
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}

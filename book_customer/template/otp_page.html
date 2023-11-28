@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<!-- Mirrored from bookland.dexignzone.com/xhtml/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Jan 2023 13:26:57 GMT -->
+<head>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content=""/>
+    <meta name="author" content="DexignZone"/>
+    <meta name="robots" content=""/>
+    <meta name="description" content="Bookland-Book Store Ecommerce Website"/>
+    <meta property="og:title" content="Bookland-Book Store Ecommerce Website"/>
+    <meta property="og:description" content="Bookland-Book Store Ecommerce Website"/>
+    <meta property="og:image" content="../../makaanlelo.com/tf_products_007/bookland/xhtml/social-image.html"/>
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- FAVICONS ICON -->
+    <link rel="icon" type="image/x-icon" href="{% static 'images/BM/Book Mania-7.png' %}"/>
+
+    <!-- PAGE TITLE HERE -->
+    <title>Bookland Book Store Ecommerce Website</title>
+
+    <!-- MOBILE SPECIFIC -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'vendor/bootstrap-select/dist/css/bootstrap-select.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'icons/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/swiper/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+    <!-- GOOGLE FONTS-->
+    <link rel="preconnect" href="{% static 'https://fonts.googleapis.com/' %}">
+    <link rel="preconnect" href="{% static 'https://fonts.gstatic.com/' %}" crossorigin>
+    <link href="{% static 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&amp;family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap' %}"
+          rel="stylesheet">
+
+</head>
+<body>
+
+<div class="page-wraper">
+    <div id="loading-area" class="preloader-wrapper-1">
+        <div class="preloader-inner">
+            <div class="preloader-shade"></div>
+            <div class="preloader-wrap"></div>
+            <div class="preloader-wrap wrap2"></div>
+            <div class="preloader-wrap wrap3"></div>
+            <div class="preloader-wrap wrap4"></div>
+            <div class="preloader-wrap wrap5"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <!-- Header End -->
+
+
+    <div class="page-content">
+        <!-- inner page banner -->
+        <div class="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm"
+             style="background-image:url({% static 'images/background/bg3.jpg' %});">
+            <div class="container">
+                <div class="dz-bnr-inr-entry">
+                    <h1>Book Mania</h1>
+
+                </div>
+            </div>
+        </div>
+        <!-- inner page banner End-->
+
+        <!-- contact area -->
+        <section class="content-inner shop-account">
+            <!-- Product -->
+            <div class="container">
+                <div class="row">
+                    <center>
+                        <div class="col-lg-6 col-md-6 mb-4">
+                            <div class="login-area">
+                                <div class="tab-content nav">
+
+                                    <form id="login" class="tab-pane active col-12" method="POST"
+                                          action="/c/c_password/">
+
+                                        {% csrf_token %}
+
+                                        <h4 class="text-secondary">Reset-Password</h4>
+
+                                        <div class="mb-4">
+                                            <label class="label-title">OTP *</label>
+                                            <input name="sotp" id="sotp" required=""
+                                                   class="form-control" placeholder="Enter your otp" type="text">
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <label class="label-title"> Create New-Password *</label>
+                                            <input name="new_password" id="new_password" required=""
+                                                   class="form-control" placeholder="Enter your new password"
+                                                   type="password">
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <label class="label-title">Confirm Password *</label>
+                                            <input name="confirm_password" id="confirm_password" required=""
+                                                   class="form-control "
+                                                   placeholder="Confirm your password" type="password">
+                                        </div>
+
+                                        <div class="text-left">
+                                            <button class="btn btn-primary btnhover me-2" type="submit">Submit</button>
+                                        </div>
+
+                                        {% for data in messages %}
+                                        <span style="color:red"> {{data}} </span>
+                                        {% endfor %}
+
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </center>
+                </div>
+            </div>
+            <!-- Product END -->
+        </section>
+        <!-- contact area End-->
+    </div>
+
+    <button class="scroltop" type="button"><i class="fas fa-arrow-up"></i></button>
+</div>
+<!-- JAVASCRIPT FILES ========================================= -->
+<script src="{% static 'js/jquery.min.js' %}"></script><!-- JQUERY MIN JS -->
+<script src="{% static 'vendor/wow/wow.min.js' %}"></script><!-- WOW JS -->
+<script src="{% static 'vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script><!-- BOOTSTRAP MIN JS -->
+<script src="{% static 'vendor/bootstrap-select/dist/js/bootstrap-select.min.js' %}"></script>
+<!-- BOOTSTRAP SELECT MIN JS -->
+<script src="{% static 'vendor/counter/waypoints-min.js' %}"></script><!-- WAYPOINTS JS -->
+<script src="{% static 'vendor/counter/counterup.min.js' %}"></script><!-- COUNTERUP JS -->
+<script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script><!-- SWIPER JS -->
+<script src="{% static 'js/dz.carousel.js' %}"></script><!-- DZ CAROUSEL JS -->
+<script src="{% static 'js/dz.ajax.js' %}"></script><!-- AJAX -->
+<script src="{% static 'js/custom.js' %}"></script><!-- CUSTOM JS -->
+</body>
+
+<!-- Mirrored from bookland.dexignzone.com/xhtml/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Jan 2023 13:27:17 GMT -->
+</html>

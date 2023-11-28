@@ -1,0 +1,157 @@
+{% extends 'admin_header.html' %}
+{% load static %}
+{% block content %}
+<!-- Main Content -->
+<div class="main-content">
+    <section class="section">
+        <div class="section-header">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <br/>
+                    <div class="section-header-breadcrumb-content-chart float-right">
+                        <h1>Profile</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-body">
+            <div class="row mt-sm-4 background-image-body">
+                <div class="col-md-12 col-lg-12 box-center">
+                    <div class="row author-box">
+                        <img alt="image" src="{% static 'assets/img/BM/logo-2.png' %} "
+                             class="rounded-circle author-box-picture box-center mt-4">
+                    </div>
+                    <div class="row author-box">
+                        <div class="page-inner box-center align-center">
+                            <h2><a href="#">{{request.session.admin_fname}} {{request.session.admin_lname}}</a></h2>
+                            <div class="page-description">
+                                <h5>Admin</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <form method="post" class="needs-validation" action="/update_pass/">
+                                {% csrf_token %}
+                <div class="row" >
+                <div class="col-12 col-md-12 col-lg-4"  >
+                    <div class="card" style="position:relative;top:20px;">
+                        <div class="card-header">
+                            <h4>Change Password</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="py-4">
+                                <p class="clearfix">
+                        <span class="float-left">
+                          Current Password
+                        </span>
+                            <input type="password" name="" class="form-control" value="">
+                                </p>
+                                <p class="clearfix">
+
+                        <span class="float-left">
+                          New Password
+                        </span>
+                            <input type="password" name="pass" class="form-control" value="">
+
+                                </p>
+                                <p class="clearfix">
+                        <span class="float-left">
+                            Confirm Password
+                        </span>
+                                    <input type="password" name="cpass" class="form-control" value="">
+                                </p>
+                                <p class="clearfix">
+                                </p>
+
+                                <div class="card-footer text-right">
+                                    <button class="btn btn-primary">Save Changes</button>
+                                </div>
+                                {% for data in messages %}
+
+                                <span style="color:red"> {{data}} </span>
+
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </form>
+
+                <div class="col-12 col-md-12 col-lg-8" style="position:relative;top:20px;">
+                    <div class="card">
+                        <div class="padding-20">
+                            <form method="post" class="needs-validation" action="/profile/">
+                                {% csrf_token %}
+
+
+                                <div class="card-header">
+                                    <h4>Edit Profile</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-md-6 col-12">
+                                            <label>First Name</label>
+                                            <input type="text" class="form-control"
+                                                   name="u_fname" value="{{uid.u_fname}}">
+                                            <div class="invalid-feedback">
+                                                Please fill in the first name
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 col-12">
+                                            <label>Last Name</label>
+                                            <input type="text" class="form-control"
+                                                   name="u_lname" value="{{uid.u_lname}}">
+                                            <div class="invalid-feedback">
+                                                Please fill in the last name
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-7 col-12">
+                                            <label>Email</label>
+                                            <input type="email" class="form-control"
+                                                   name="u_email" value="{{uid.u_email}}">
+                                            <div class="invalid-feedback">
+                                                Please fill in the email
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-5 col-12">
+                                            <label>Contact</label>
+                                            <input type="tel" class="form-control"
+                                                   name="u_contact" value="{{uid.u_contact}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <label>Address</label>
+                                       <input type="text" class="form-control"
+                                                   name="u_address" value="{{uid.u_address}}">
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-6 col-12">
+                                            <label>Area</label>
+                                            <select class="form-control" name="a_id">
+                                                {% for val in area %}
+                                                <option value="{{val.a_id}}">{{val.a_name}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-right">
+                                    <button class="btn btn-primary">Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+</div>
+
+{% endblock %}

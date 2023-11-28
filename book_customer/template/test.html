@@ -1,0 +1,14 @@
+{% load static %}
+{% for cat in c %}
+
+<li class="sub-dropdown-hover" value="{{cat.c_id}}"><a>{{cat.c_name}} </a>
+    <ul class="sub-menu">
+        {% for sub in s %}
+        {% if cat.c_id == sub.c_id_id %}
+        <li value="{{sub.s_id}}"><a href="/c/new_book/{{sub.s_id}}">{{sub.s_name}}</a></li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</li>
+
+{% endfor %}

@@ -1,0 +1,111 @@
+{% extends 'admin_header.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Main Content -->
+<div class="main-content">
+    <section class="section">
+        <div class="section-header">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="section-header-breadcrumb-content-chart float-right">
+                        <h1>Order</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Order Table</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                                    <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Order Date</th>
+                                        <th>Order Status</th>
+                                        <th>User First Name</th>
+                                        <th>User Last Name</th>
+                                        <th>Total Amount</th>
+                                        <th>Payment Status</th>
+                                        <th>Action</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for data in o %}
+
+                                    <tr>
+                                        <td>{{data.o_id}}</td>
+                                        <td>{{data.o_date}}</td>
+                                        <td>{{data.o_status}}</td>
+                                        <td>{{data.u_id.u_fname}}</td>
+                                        <td>{{data.u_id.u_lname}}</td>
+                                        <td>{{data.total_amount}}</td>
+                                        <td>
+                                            {% if data.payment_status == 1 %}
+                                            <span class="badge badge-secondary">Cash On Delivery</span>
+
+                                            {% elif data.payment_status == 2 %}
+                                            <span class="badge badge-primary">Online Payment</span>
+
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if data.o_status == 1 %}
+                                            <div style="display:none"></div>
+                                            <a href="/accept/{{ data.or_id }}" style="cursor:default"
+                                               onclick="return false;">
+                                                <i class="fa fa-check" style="color:green; font-size:18px;"></i> </a>
+                                            &nbsp;&nbsp;
+                                            <a href="/reject/{{ data.o_id }}" onclick="return false;"
+                                               style="cursor:default">
+                                                <i class="fa fa-times" style="color:red; font-size: 18px;"></i></a>
+                                            {% elif data.o_status == 2 %}
+                                            <a href="/accept/{{ data.o_id }}" style="cursor:default"
+                                               onclick="return false;">
+                                                <i class="fa fa-check" style="color:green; font-size:18px;"></i> </a>
+                                            &nbsp;&nbsp;
+                                            <a href="/reject/{{ data.o_id }}" onclick="return false;"
+                                               style="cursor:default">
+                                                <i class="fa fa-times" style="color:red; font-size: 18px;"></i></a>
+                                            {% else %}
+                                            <a href="/accept/{{ data.o_id }}">
+                                                <i class="fa fa-check" style="color:green; font-size: 18px;"></i> </a>
+                                            &nbsp;&nbsp;
+                                            <a href="/reject/{{ data.o_id }}">
+                                                <i class="fa fa-times" style="color:red; font-size: 18px;"></i></a>
+                                            {% endif %}
+                                        </td>
+
+                                        <td>
+                                            {% if data.o_status == 1 %}
+                                            <span class="badge badge-success">ACCEPTED</span>
+                                            {% elif data.o_status == 2 %}
+                                            <span class="badge badge-danger">REJECTED</span>
+                                            {% else %}
+                                            <span class="badge badge-warning">PENDING</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+
+                                    {% endfor %}
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

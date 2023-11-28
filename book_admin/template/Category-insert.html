@@ -1,0 +1,72 @@
+{% extends 'admin_header.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Main Content -->
+<div class="main-content">
+    <section class="section">
+        <div class="section-header">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="section-header-breadcrumb-content-chart float-right">
+                        <h1>Category</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-body">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Insert Category</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                            </div>
+
+
+                            <form method="post" action="/ci/" data-parsley-validate="">
+                                {% csrf_token %}
+                                <div class="card-body">
+                                    <div class="row">
+
+                                        <div class="col-lg-4 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label>Category Name</label>
+                                                <input type="text"
+                                                       class="form-control"
+                                                       name="c_name"
+                                                       data-parsley-required="true"
+                                                       data-parsley-required-message="Category name is required !">
+
+                                                <br/>
+                                                <br/>
+
+                                                <label>Category Description</label>
+                                                <textarea class="form-control"
+                                                          name="c_des"
+                                                          data-parsley-required="true"
+                                                          data-parsley-required-message="Category description is required !">
+                                                </textarea>
+
+                                                <br/>
+                                                <br/>
+
+                                                <input type="submit" class="btn btn-primary">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

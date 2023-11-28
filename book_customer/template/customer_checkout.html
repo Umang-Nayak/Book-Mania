@@ -1,0 +1,168 @@
+{% extends 'customer_header.html' %}
+{% load static %}
+{% load cart_tag %}
+{% block content %}
+{% load mathfilters %}
+
+
+<div class="page-content">
+    <!-- inner page banner -->
+    <div class="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm"
+         style="background-image:url({% static 'images/background/bg3.jpg' %});">
+        <div class="container">
+            <div class="dz-bnr-inr-entry">
+                <h1>Checkout</h1>
+                <nav aria-label="breadcrumb" class="breadcrumb-row">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% static 'index.html' %}"> Home</a></li>
+                        <li class="breadcrumb-item">Checkout</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- inner page banner End-->
+
+    <!-- contact area -->
+    <section class="content-inner-1">
+        <!-- Product -->
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="widget">
+                        <h4 class="widget-title">Billing & Shipping Address</h4>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" placeholder="First Name" value="{{uid.u_fname}}"
+                                       name="u_fname">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" placeholder="Last Name" name="u_lname"
+                                       value="{{uid.u_lname}}">
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Address" name="u_address"
+                                   value="{{uid.u_address}}">
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <input type="email" class="form-control" placeholder="Email" name="u_email"
+                                       value="{{uid.u_email}}">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" placeholder="Phone" name="u_contact"
+                                       value="{{uid.u_contact}}">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <h4 class="widget-title">Order Total</h4>
+                    <table class="table-bordered check-tbl mb-4">
+                        <tbody>
+                        <tr>
+                            <td>Order Subtotal</td>
+                            <td class="product-price">₹ {{subtotal}}</td>
+                        </tr>
+                        <tr>
+                            <td>Shipping</td>
+                            <td>₹ 50</td>
+                        </tr>
+                        <tr>
+                            <td>Total</td>
+                            <td class="product-price-total">₹ {{subtotal|add:50}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <h4 class="widget-title">Payment Method</h4>
+                    <form class="text-center border border-light p-5" action="/c/order_success1/1" method="POST">
+
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="submit" class="form-control" value="Cash On Delivery">
+                        </div>
+                    </form>
+
+                    <h4 class="widget-title">Online Payment</h4>
+                    <div class="form-group">
+
+                        <!--									<button class="btn btn-primary btnhover" href="customer_orderlist" type="submit">Place Order Now </button>-->
+                        <form class="text-center border border-light p-5" action="/c/order_success/1" method="POST">
+
+                            {% csrf_token %}
+
+                            <input type="hidden" name="name" id="name" required class="form-control mb-4"
+                                   placeholder="Name">
+
+                            <!-- RAZORPAY INTEGRATION HERE -->
+
+                            <script src="https://checkout.razorpay.com/v1/checkout.js"
+                                    data-key="rzp_test_Khgr98NxlZvmvM"
+                                    data-amount="{{subtotal|add:50|mul:100}}"
+                                    data-currency="INR"
+                                    data-order_id="{{payment.id}}"
+                                    data-buttontext="Pay with Razorpay"
+                                    data-name="Book Mania"
+                                    data-url_root="https://eneqd3r9zrjok.x.pipedream.net/" ,
+                                    data-description="Online Book Store"
+                                    data-image="{% static 'pvr_img/Pvr_logo.png' %}"
+                                    data-prefill.name="Jay Patel"
+                                    data-prefill.email="jay.daswala@gmail.com"
+                                    data-theme.color="#F37254">
+
+                            </script>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="dz-divider bg-gray-dark text-gray-dark icon-center  my-5"><i
+                    class="fa fa-circle bg-white text-gray-dark"></i></div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="widget">
+                        <h4 class="widget-title">Your Order</h4>
+                        <table class="table-bordered check-tbl">
+                            <thead class="text-center">
+                            <tr>
+                                <th>BOOK</th>
+                                <th>BOOK NAME</th>
+                                <th>TOTAL</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% if 'customer_id' in request.session %}
+                            {% for data in item %}
+
+
+                            <tr>
+                                <td class="product-item-img">
+                                    <img src="{% static 'assets/img/' %}{{data.b_id.b_img}}" alt="">
+                                </td>
+                                <td class="product-item-name">{{data.b_id.b_name}}</td>
+                                <td class="product-price">₹ {{data.amount}}</td>
+                            </tr>
+
+                            {% endfor %}
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Product END -->
+    </section>
+    <!-- contact area End-->
+</div>
+
+{% endblock %}

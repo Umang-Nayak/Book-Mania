@@ -1,0 +1,88 @@
+{% extends 'admin_header.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Main Content -->
+<div class="main-content">
+    <section class="section">
+        <div class="section-header">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="section-header-breadcrumb-chart float-right">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Sub-category Report By Category</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <form method="POST" action="/od_report4/">
+                                    {% csrf_token %}
+                                    <table>
+                                        <tr>
+                                            <th>
+                                                Category Name
+                                            </th>
+
+                                        </tr>
+                                        <tr>
+
+                                            <td>
+                                                <select class="form-control" name="c_id">
+                                                    {% for val in cat %}
+
+                                                    <option value="{{val.c_id}}">{{val.c_name}}</option>
+
+                                                    {% endfor %}
+                                                </select>
+                                            </td>
+
+                                            <td>
+
+                                                <input type="submit" class="btn btn-primary">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                                    <thead>
+                                    <tr>
+                                        <th>Sub-category ID</th>
+                                        <th>Sub-category Name</th>
+                                        <th>Sub-category Description</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for data in sub_category %}
+
+                                    <tr>
+                                        <td>{{data.s_id}}</td>
+                                        <td>{{data.s_name}}</td>
+                                        <td>{{data.s_des}}</td>
+                                    </tr>
+
+                                    {% endfor %}
+
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

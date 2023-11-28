@@ -1,0 +1,47 @@
+{% load static %}
+{% for x in p %}
+ <div class="col-book style-2">
+                            <div class="dz-shop-card style-1">
+                                <div class="dz-media">
+                                    <img src="{% static 'assets/img/' %}{{x.b_img}}" alt="book">
+                                </div>
+                                <form method="POST" action="/c/cl_wishlist/">
+                                    {% csrf_token %}
+
+                                    <div class="bookmark-btn style-2">
+                                        <!--										<input class="form-check-input" type="hiden" id="flexCheckDefault1">-->
+                                        <input type="hidden" name="b_id" value="{{x.b_id}}">
+                                    </div>
+                                </form>
+                                <div class="dz-content">
+                                    <h5 class="title"><a href="/c/customer_book_detail/{{x.b_id}}">{{x.b_name}}</a></h5>
+
+                                    <div class="book-footer">
+                                        <div class="price">
+                                            <span class="price-num">₹{{x.b_price}}</span>
+                                        </div>
+                                        <br/>
+                                        <div class="form-group m-b25">
+                                            <form method="post" action="/c/customer_book_detail/{{x.b_id}}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="price" value="{{book.b_price}}">
+                                                <input class="btn btn-primary btnhover" value="Book Details"
+                                                       type="submit">
+                                            </form>
+                                        </div>
+
+
+                                        <!--											<form method="post" action="/c/insert_cart/{{x.b_id}}">-->
+                                        <!--												{% csrf_token %}-->
+                                        <!--												<input type="hidden" name="b_id" value="{{x.b_id}}">-->
+                                        <!--												<input type="hidden" name="qty" value="1">-->
+                                        <!--												<input type="hidden" name="price" value="{{x.b_price}}"/>-->
+                                        <!--											<button  class="btn btn-secondary box-btn btnhover btnhover2"><i class="flaticon-shopping-cart-1 m-r10"></i> Add to cart</button>-->
+                                        <!--											</form>-->
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+{% endfor %}

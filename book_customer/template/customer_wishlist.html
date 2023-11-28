@@ -1,0 +1,147 @@
+{% extends 'customer_header.html' %}
+{% load static %}
+{% load mathfilters %}
+{% block content %}
+{% load cart_tag %}
+<script>
+    function up(max) {
+	alert("Hello");
+	var qty = parseInt(document.getElementById("qty-"+max).value) + 1;
+    alert(qty);
+    document.getElementById("qty-"+max).value = qty;
+		getQty(max);
+}
+
+function down(min) {
+	alert("Hello");
+	var qty = parseInt(document.getElementById("qty-"+min).value) - 1;
+	if (qty ==0)
+	    alert("no")
+         return false;
+	else
+        document.getElementById("qty-"+min).value = qty;
+        location.reload();
+	getQty(min);
+}
+
+function getQty(val)
+{
+	alert("Hello");
+	var q = $("#qty-"+val).val();
+	alert(q)
+		$.ajax({
+	        type:'GET',
+			url:'/c/update_cart/'+val,
+            data:{id:val,qty:q},
+			success: function(data){
+                    location.reload();
+			}
+	});
+}
+
+function getQtyPlus(val)
+{
+
+	alert(val);
+	var q = $("#qty-"+val).val();
+	alert(q)
+		$.ajax({
+	        type:'GET',
+			url:'/c/update_cart/'+val,
+            data:{id:val,qty:q},
+			success: function(data){
+                    location.reload();
+			}
+	});
+
+}
+function getQtyMius(val)
+{
+	alert(val);
+	var q = $("#qty-"+val).val();
+	alert(q)
+		$.ajax({
+	        type:'GET',
+			url:'/c/update_cart/'+val,
+            data:{id:val,qty:q},
+			success: function(data){
+                    location.reload();
+			}
+	});
+
+}
+</script>
+
+
+
+
+<div class="page-content">
+	<!-- inner page banner -->
+		<div class="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm"
+			 style="background-image:url({% static 'images/background/bg3.jpg' %});">
+			<div class="container">
+				<div class="dz-bnr-inr-entry">
+					<h1>Wishlist</h1>
+					<nav aria-label="breadcrumb" class="breadcrumb-row">
+						<ul class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/c/main/">Home</a></li>
+							<li class="breadcrumb-item">Wishlist</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	<!-- inner page banner End-->
+		<div class="content-inner-1">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="table-responsive">
+							<table style="text-align:center" class="table check-tbl">
+									<thead>
+										<tr>
+											<th>Product</th>
+											<th>Product name</th>
+											<th>Unit Price</th>
+											<th>Add to cart </th>
+											<th>Remove</th>
+										</tr>
+									</thead>
+								<tbody>
+
+								{% if 'customer_id' in request.session %}
+                            		{% for data in us %}
+
+									<tr>
+										<td class="product-item-img"><img src="{% static 'assets/img/' %}{{data.b_id.b_img}}" alt=""></td>
+										<td class="product-item-name">{{data.b_id.b_name}}</td>
+										<td class="product-item-price">₹ {{data.b_id.b_price}}</td>
+										<td class="product-item-totle">
+										<form method="post" action="/c/insert_cart/{{data.b_id_id}}">
+												{% csrf_token %}
+												<input type="hidden" name="b_id_id" value="{{data.b_id_id}}">
+												<input type="hidden" name="qty" value="1">
+												<input type="hidden" name="price" value="{{data.b_id.b_price}}"/>
+											<button type="submit"  class="btn btn-primary btnhover btnhover2"><i class="flaticon-shopping-cart-1"></i> <span>Add to cart</span></button>
+										</form>
+										</td>
+										<td>
+											<a href="/c/c_dwishlist/{{data.w_id}}"><i class="fa-solid fa-xmark fa-2xl"></i></a>
+										</td>
+
+
+									</tr>
+								    {% endfor %}
+								{% endif %}
+
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+{% endblock %}

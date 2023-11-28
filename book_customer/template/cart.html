@@ -1,0 +1,239 @@
+{% extends 'customer_header.html' %}
+{% load static %}
+{% load mathfilters %}
+{% block content %}
+{% load cart_tag %}
+
+<script>
+function up(max) {
+<!--	alert("hello");-->
+	var qty = parseInt(document.getElementById("qty-"+max).value) + 1;
+<!--    alert(qty);-->
+    document.getElementById("qty-"+max).value = qty;
+		getQty(max);
+}
+
+function down(min) {
+	var qty = parseInt(document.getElementById("qty-"+min).value) - 1;
+<!--	alert(qty);-->
+	if (qty == 0)
+	{
+         return false;
+    }
+	else
+	{
+        document.getElementById("qty-"+min).value = qty;
+    }
+	     getQty(min);
+}
+
+function getQty(val)
+{
+	var q = $("#qty-"+val).val();
+<!--	alert(q);-->
+		$.ajax({
+	        type:'GET',
+			url:'/c/update_cart/'+val,
+            data:{id:val,qty:q},
+			success: function(data){
+<!--			alert(data);-->
+                    location.reload();
+			}
+	});
+
+}
+
+function getQtyPlus(val)
+{
+<!--	alert(hello);-->
+	var q = $("#qty-"+val).val();
+<!--	alert(q)-->
+		$.ajax({
+	        type:'GET',
+			url:'/c/update_cart/'+val,
+            data:{id:val,qty:q},
+			success: function(data){
+                    location.reload();
+			}
+	});
+
+}
+function getQtyMius(val)
+{
+<!--	alert(hello);-->
+	var q = $("#qty-"+val).val();
+<!--	alert(q)-->
+		$.ajax({
+	        type:'GET',
+			url:'/c/update_cart/'+val,
+            data:{id:val,qty:q},
+			success: function(data){
+                   location.reload();
+			}
+	});
+
+}
+
+</script>
+
+
+<div class="page-content">
+    <!-- inner page banner -->
+    <div class="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm"
+         style="background-image:url({% static 'images/background/bg3.jpg' %});">
+        <div class="container">
+            <div class="dz-bnr-inr-entry">
+                <h1>Cart</h1>
+                <nav aria-label="breadcrumb" class="breadcrumb-row">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/c/main">Home</a></li>
+                        <li class="breadcrumb-item">Cart</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- inner page banner End-->
+
+    <!-- contact area -->
+    <section class="content-inner shop-account">
+        <!-- Product -->
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-12">
+                    <div class="table-responsive">
+                        <table class="table check-tbl">
+                            <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Product name</th>
+                                <th>Unit Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th class="text-end">Remove</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% if 'customer_id' in request.session %}
+                            {% for data in item %}
+
+                            <tr>
+                                <td class="product-item-img">
+                                    <img src="{% static 'assets/img/' %}{{data.b_id.b_img}}" alt=""></td>
+                                <td class="product-item-name">{{data.b_id.b_name}}</td>
+                                <td class="product-item-price">₹ {{data.b_id.b_price}}</td>
+                                <td class="product-item-quantity">
+
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <button id="down" class="btn btn-default" type="button"
+                                                    onclick="down({{data.cart_id}})"><span
+                                                    class="glyphicon glyphicon-minus"><i class="fa fa-minus"></i></span>
+                                            </button>
+                                        </div>
+                                        <input type="number" id="qty-{{data.cart_id}}" class="cart-plus-minus-box"
+                                               style="width:45px;height:40px; text-align:center;background-color:white;border:none;color:black;"
+                                               value="{{data.qty}}"
+                                               onChange="getQty({{data.qty}})" name="qty" readonly="readonly"/>
+                                        <div class="input-group-btn">
+                                            <button id="up" class="btn btn-default" type="button"
+                                                    onclick="up({{data.cart_id}})"><span
+                                                    class="glyphicon glyphicon-plus">
+																	<i class="fa fa-plus"></i> </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="product-item-total">₹ {{data.amount}}</td>
+                                <td class="product-item-close">
+                                    <a href="/c/c_delete/{{data.cart_id}}" class="">X</a>
+                                </td>
+                            </tr>
+
+                            {% endfor %}
+                            {% else %}
+                           {% for key,value in request.session.cart.items %}
+
+                            <tr>
+                                <td class="product-item-img">
+                                    <img src="{% static 'assets/img/' %}{{value.image}}" alt="">
+                                </td>
+                                <td class="product-item-name">{{value.name}}</td>
+                                <td class="product-item-price">₹ {{value.price}}</td>
+                                <td class="product-item-quantity">
+
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <button id="down1" class="btn btn-default"
+                                                    type="button"
+                                                    onclick="down({{value.id}})">
+                                                <span class="glyphicon glyphicon-minus">
+                                                    <i class="fa fa-minus"></i>
+                                                </span>
+                                            </button>
+                                        </div>
+                                        <input type="number" id="qty-{{value.id}}" class="cart-plus-minus-box"
+                                               style="width:45px;height:40px; text-align:center;background-color:white;border:none;color:black;"
+                                               value="{{value.quantity}}"
+                                               onChange="getQty({{value.id}})" name="qty" readonly="readonly"/>
+                                        <div class="input-group-btn">
+                                            <button id="up1"
+                                                    class="btn btn-default"
+                                                    type="button"
+                                                    onclick="up({{value.id}})">
+                                                <span class="glyphicon glyphicon-plus">
+                                                <i class="fa fa-plus"></i>
+                                            </span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </td>
+                                <td class="product-item-totle">₹ {{value.price|multiply:value.quantity}}</td>
+                                <td class="product-item-close">
+                                    <a href="/c/c_delete/{{value.id}}" class="">X</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            {% for x in messages %}
+            <span style="color:red">{{x}}</span>
+            {% endfor %}
+            <div class="col-lg-6">
+                <div class="widget">
+                    <h4 class="widget-title">Cart Subtotal</h4>
+                    <table class="table-bordered check-tbl m-b25">
+                        <tbody>
+                        <tr>
+                            <td>Order Subtotal</td>
+                            <td>₹ {{subtotal}}</td>
+                        </tr>
+                        <tr>
+                            <td>Shipping</td>
+                            <td>₹ 50</td>
+                        </tr>
+                        <tr>
+                            <td>Total</td>
+                            <td>₹ {{subtotal|add:50}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="form-group m-b25">
+                        <a href="/c/checkout/" class="btn btn-primary btnhover" type="button">Proceed to Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Product END -->
+    </section>
+    <!-- contact area End-->
+</div>
+
+{% endblock %}

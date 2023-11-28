@@ -1,0 +1,134 @@
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.7.0/parsley.min.js"></script>
+
+
+{% extends 'admin_header.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Main Content -->
+<div class="main-content">
+    <section class="section">
+        <div class="section-header">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="section-header-breadcrumb-content-chart float-right">
+                        <h1>Book</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-body">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Insert Book</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                            </div>
+
+
+                            <form method="post" action="/bi/" enctype="multipart/form-data" data-parsley-validate="">
+                                {% csrf_token %}
+
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12 col-sm-12">
+                                            <div class="form-group">
+
+                                                <label>Book Name</label>
+                                                <input type="text"
+                                                       class="form-control"
+                                                       name="b_name"
+                                                       data-parsley-required="true"
+                                                       data-parsley-required-message="Book name is required !">
+
+                                                <br/>
+                                                <br/>
+
+                                                <label>Book Price</label>
+                                                <input type="text"
+                                                       class="form-control"
+                                                       name="b_price"
+                                                       data-parsley-required="true"
+                                                       data-parsley-required-message="Book price is required !">
+
+                                                <br/>
+                                                <br/>
+
+
+                                                <label>Book Quantity</label>
+                                                <input type="text"
+                                                       class="form-control"
+                                                       name="b_qty"
+                                                       data-parsley-required="true"
+                                                       data-parsley-required-message="Book Quantity is required !">
+
+                                                <br/>
+                                                <br/>
+
+                                                <label>Book Image</label>
+                                                <input type="file"
+                                                       class="form-control"
+                                                       name="b_img"
+                                                       data-parsley-required="true"
+                                                       data-parsley-required-message="Book Image is required !">
+
+                                                <br/>
+                                                <br/>
+
+                                                <label>Book Description</label>
+                                                <textarea class="form-control"
+                                                          name="b_des"
+                                                          data-parsley-required="true"
+                                                          data-parsley-required-message="Book description is required !">
+                                                </textarea>
+
+                                                <br/>
+                                                <br/>
+
+                                                <label>Sub-Category Name</label>
+                                                <select class="form-control" name="s_id">
+                                                    {% for val in sub_category %}
+
+                                                    <option value="{{val.s_id}}">{{val.s_name}}</option>
+
+                                                    {% endfor %}
+                                                </select>
+
+                                                <br/>
+                                                <br/>
+
+                                                <label>Language Name</label>
+                                                <select class="form-control" name="l_id">
+                                                    {% for val in language %}
+
+                                                    <option value="{{val.l_id}}">{{val.l_name}}</option>
+
+                                                    {% endfor %}
+                                                </select>
+
+                                                <br/>
+                                                <br/>
+
+                                                <input type="hidden" class="form-control" name="u_id" value="0">
+                                                <input type="hidden" class="form-control" name="is_available" value="1">
+                                                <input type="submit" class="btn btn-primary">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,443 @@
+{% extends 'customer_header.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="page-content bg-white">
+    <!--Swiper Banner Start -->
+    <div class="main-slider style-1">
+        <div class="main-swiper">
+
+            <div class="swiper-slide bg-blue"
+                 style="background-image: url({% static 'images/background/waveelement.png' %});">
+                <div class="container">
+                    <div class="banner-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="swiper-content">
+                                    <div class="content-info">
+                                        <h6 class="sub-title" data-swiper-parallax="-5">BEST BOOK SELLING WEBSITE</h6>
+                                        <h1 class="title mb-0" data-swiper-parallax="-15" style="font-size:45px">
+                                            We have Large Number of books on sale</h1>
+                                        <ul class="dz-tags" data-swiper-parallax="-30">
+
+                                        </ul>
+                                        <p class="text mb-0" data-swiper-parallax="-40">Buy And Sell Used Books In
+                                            India. Search And Buy Second Hand Books Near You.
+                                            <br><br>Book Mania is customer to customer platform like Olx for books. Sell
+                                            and buy old books in India at zero commission.
+                                        </p>
+                                    </div>
+                                    <div class="partner">
+                                        <p>Our partner</p>
+                                        <h4 style="color:white;font-size:20px">
+                                            <i class="fas fa-user"></i> Umang Nayak
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="banner-media" data-swiper-parallax="-100">
+                                    <img src="{% static 'images/BM/logo-2.2.png' %}" alt="banner-media1">
+                                </div>
+                                <img class="pattern" src="{% static 'images/Group.png' %}"
+                                     data-swiper-parallax="-100" alt="dots">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="swiper main-swiper-thumb">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"></div>
+                <div class="swiper-slide"></div>
+                <div class="swiper-slide"></div>
+                <div class="swiper-slide"></div>
+            </div>
+        </div>
+    </div>
+
+    <!--Recommend Section Start-->
+    <section class="content-inner-1 bg-grey reccomend">
+        <div class="container">
+            <div class="section-head text-center">
+                <h2 class="title"><i class="fas fa-book"></i> Recomended For You <i class="fas fa-book"></i></h2>
+                <p>All the Books shown below are new <i class="fas fa-smile"></i></p>
+            </div>
+            <!-- Swiper -->
+            <div class="swiper-container swiper-two">
+                <div class="swiper-wrapper">
+
+
+                    {% for data in book %}
+
+                    <div class="swiper-slide">
+                        <div class="books-card style-1 wow fadeInUp" data-wow-delay="0.3s">
+                            <div class="dz-media">
+                                <img src="{% static 'assets/img/' %}{{data.b_img}}" height="150px" width="150px"
+                                     alt="book">
+                            </div>
+                            <div class="dz-content">
+                                <h4 class="title">{{data.b_name}}</h4>
+                                <span class="price">₹ {{data.b_price}}</span>
+                                <a href="/c/cdetail/{{data.b_id}}" class="btn btn-secondary btnhover btnhover2">Book
+                                    Detail</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- icon-box1 -->
+    <section class="content-inner-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="icon-bx-wraper style-1 m-b20 text-center">
+                        <div class="icon-bx-sm m-b10">
+                            <i class="flaticon-power icon-cell"></i>
+                        </div>
+                        <div class="icon-content">
+                            <h5 class="dz-title m-b10">Quick Delivery</h5>
+                            <p>Book Mania specializes in goods delivery within India,
+                                We assure to extend our excellent services.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="icon-bx-wraper style-1 m-b20 text-center">
+                        <div class="icon-bx-sm m-b10">
+                            <i class="flaticon-shield icon-cell"></i>
+                        </div>
+                        <div class="icon-content">
+                            <h5 class="dz-title m-b10">Secure Payment</h5>
+                            <p>We have the ultimate guide to set up a secure payment gateway on our website.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="icon-bx-wraper style-1 m-b20 text-center">
+                        <div class="icon-bx-sm m-b10">
+                            <i class="flaticon-like icon-cell"></i>
+                        </div>
+                        <div class="icon-content">
+                            <h5 class="dz-title m-b10">Best Quality</h5>
+                            <p>We have Book Mania website which creativity flowing with 30+ award-winning website design
+                                examples.
+                                These will inspire the color, balance, and interactivity for your site.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="icon-bx-wraper style-1 m-b20 text-center">
+                        <div class="icon-bx-sm m-b10">
+                            <i class="flaticon-star icon-cell"></i>
+                        </div>
+                        <div class="icon-content">
+                            <h5 class="dz-title m-b10">Return Guarantee</h5>
+                            <p>We stand by the quality of our products and are confident that you will be satisfied with
+                                your purchase.
+                                If, for any reason, you are not happy with our products, we offer a 30-day money-back
+                                guarantee.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Users Book -->
+    <section class="content-inner-2">
+        <div class="container">
+            <div class="section-head book-align">
+                <ul>
+                    <li>
+                        <h1 class="title mb-0">Used books <i class="fas fa-book"></i></h1>
+                    </li>
+                    <li>
+                        <p>All the Books shown below are used <i class="fas fa-smile"></i></p>
+                    </li>
+                </ul>
+                <div class="pagination-align style-1">
+                    <div class="book-button-prev swiper-button-prev"><i class="fa-solid fa-angle-left"></i></div>
+                    <div class="book-button-next swiper-button-next"><i class="fa-solid fa-angle-right"></i></div>
+                </div>
+            </div>
+            <div class="swiper-container book-swiper">
+                <div class="swiper-wrapper">
+
+                    {% for data in userbook %}
+
+                    <div class="swiper-slide">
+                        <div class="dz-card style-2 wow fadeInUp" data-wow-delay="0.3s">
+                            <div class="dz-media">
+                                <img src="{% static 'assets/img/' %}{{data.b_img}}" alt="Book">
+                            </div>
+                            <div class="dz-info">
+                                <h3 class="dz-title">
+                                    {{data.b_name}}
+                                </h3>
+
+                                <div class="dz-tags">
+                                    <ul>
+                                        <li><h4 style="color:orange">
+                                            <i class="fas fa-user"></i> {{data.u_id.u_fname}} {{data.u_id.u_lname}}
+                                        </h4></li>
+                                        <li><h6>
+                                            Type - {{data.s_id.s_name}}
+                                        </h6></li>
+                                    </ul>
+                                </div>
+
+                                <div class="bookcard-footer">
+
+
+                                    <a href="/c/customer_book_detail/{{data.b_id}}"
+                                       class="btn btn-primary m-t15 btnhover btnhover2">
+                                        Book Details
+                                    </a>
+
+
+                                    <div class="price-details">
+                                        <h5>₹ {{data.b_price}}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Special Offer End -->
+
+    <!-- Testimonial -->
+    <section class="content-inner-2 testimonial-wrapper">
+        <div class="container">
+            <div class="testimonial">
+                <div class="section-head book-align">
+                    <div>
+                        <h2 class="title mb-0">Feedbacks <i class="fas fa-comment"></i></h2>
+                        <p class="m-b0">We develop interactive and user-friendly environment. Using that users sell that
+                            book that don't need it.
+                            User can also able to buy used and new books using this website.
+                            Other user who read that book also provide feedback about book which helpful to user to
+                            purchase.
+                            <br/>
+                            The feedback of user are given below :-</p>
+                    </div>
+                    <div class="pagination-align style-1">
+                        <div class="testimonial-button-prev swiper-button-prev"><i class="fa-solid fa-angle-left"></i>
+                        </div>
+                        <div class="testimonial-button-next swiper-button-next"><i class="fa-solid fa-angle-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-container testimonial-swiper">
+            <div class="swiper-wrapper">
+
+                {% for data in f %}
+
+                <div class="swiper-slide">
+                    <div class="testimonial-1">
+                        <div class="testimonial-info">
+                            <h5 class="testimonial-name">
+                                <i class="fas fa-book"></i> {{data.b_id.b_name}}
+                                <br/>
+                                <img src="{% static 'assets/img/' %}{{data.b_id.b_img}}" width="100px" height="70px"/>
+                            </h5>
+
+                            <div class="testimonial-text">
+                                <p><i class="fas fa-comment"></i> Feedback - {{data.f_des}}</p>
+                            </div>
+                            <div class="testimonial-detail">
+                                <div class="info-right">
+                                    <h4 class="testimonial-name"><i class="fas fa-user"></i> {{data.u_id.u_fname}}
+                                        {{data.u_id.u_lname}}</h4>
+                                    <span class="testimonial-position">Date : {{data.f_date}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </section>
+    <!-- Testimonial End -->
+
+    <!-- Latest News -->
+    <section class="content-inner-2">
+        <div class="container">
+            <div class="section-head text-center">
+                <h2 class="title"><i class="fas fa-star"></i> Bookie Wookie <i class="fas fa-star"></i></h2>
+                <p>
+                    News for Books <i class="fas fa-newspaper"></i>
+                </p>
+            </div>
+            <div class="swiper-container blog-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="dz-blog style-1 bg-white m-b30 wow fadeInUp" data-wow-delay="0.0s">
+                            <div class="dz-media">
+                                <img src="{% static 'images/blog/grid/blog4.jpg' %}" alt="/">
+                            </div>
+                            <div class="dz-info p-3">
+                                <h6 class="dz-title">
+                                    Benefits of reading: Smart, Diligent, Happy, Intelligent
+                                </h6>
+                                <p class="m-b0">
+                                    1) Reading Exercises the Brain. <br/>
+                                    2) Reading is a Form of (free) Entertainment. <br/>
+                                    3) Reading Improves Concentration and the Ability to Focus. <br/>
+                                    4) Reading Improves Literacy. <br/>
+                                    5) Reading Improves Sleep. <br/>
+                                    6) Reading Increases General Knowledge. <br/>
+                                    7) Reading is Motivational. <br/>
+                                    8) Reading Reduces Stress. <br/>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="dz-blog style-1 bg-white m-b30 wow fadeInUp" data-wow-delay="0.0s">
+                            <div class="dz-media">
+                                <img src="{% static 'images/blog/grid/blog3.jpg' %}" alt="/">
+                            </div>
+                            <div class="dz-info p-3">
+                                <h6 class="dz-title">
+                                    10 Things you must know to improve your reading skills !
+                                </h6>
+                                <p class="m-b0">
+                                    1) Reading environment. <br/>
+                                    2) Skim it. <br/>
+                                    3) Visualize it. <br/>
+                                    4) Summarize what you read. <br/>
+                                    5) Read out loud. <br/>
+                                    6) Find a connection. <br/>
+                                    7) Become the teacher. <br/>
+                                    8) Grab a highlighter. <br/>
+                                    9) The last paragraph. <br/>
+                                    10) Final review. <br/>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="dz-blog style-1 bg-white m-b30 wow fadeInUp" data-wow-delay="0.0s">
+                            <div class="dz-media">
+                                <img src="{% static 'images/blog/grid/blog2.jpg' %}" alt="/">
+                            </div>
+                            <div class="dz-info p-3">
+                                <h6 class="dz-title">
+                                    6 Strategies To Improve Your Reading Comprehension !
+                                </h6>
+                                <p class="m-b0">
+                                    1) Have them read aloud. <br/>
+                                    2) Provide books at the right level. <br/>
+                                    3) Reread to build fluency. <br/>
+                                    4) Talk to the teacher. <br/>
+                                    5) Supplement their class reading. <br/>
+                                    6) Talk about what they're reading. <br/>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="dz-blog style-1 bg-white m-b30 wow fadeInUp" data-wow-delay="0.0s">
+                            <div class="dz-media">
+                                <img src="{% static 'images/blog/grid/blog1.jpg' %}" alt="/">
+                            </div>
+                            <div class="dz-info p-3">
+                                <h6 class="dz-title">
+                                    We Must know why reading is important for children ?
+                                </h6>
+                                <p class="m-b0">
+                                    It helps them develop language and listening skills and prepares them
+                                    to understand the written word.
+                                    When the rhythm and melody of language become a part of a child's life,
+                                    learning to read will be as natural as learning to walk and talk.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Latest News End -->
+
+    <!-- Feature Box -->
+    <section class="content-inner bg-light">
+        <div class="container">
+            <div class="row sp15">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                    <div class="icon-bx-wraper style-2 m-b30 text-center">
+                        <div class="icon-bx-lg">
+                            <i class="fa-solid fa-users icon-cell"></i>
+                        </div>
+                        <div class="icon-content">
+                            <h2 class="dz-title counter m-b0">{{user}}</h2>
+                            <p class="font-20">Happy Customers</p>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-lg-3 col-md-6 col-sm-6 col-6">
+                    <div class="icon-bx-wraper style-2 m-b30 text-center">
+                        <div class="icon-bx-lg">
+                            <i class="fa-solid fa-book icon-cell"></i>
+                        </div>
+                        <div class="icon-content">
+                            <h2 class="dz-title counter m-b0">{{books}}</h2>
+                            <p class="font-20">Book Collections</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                    <div class="icon-bx-wraper style-2 m-b30 text-center">
+                        <div class="icon-bx-lg">
+                            <i class="fa-solid fa-location-dot icon-cell"></i>
+                        </div>
+                        <div class="icon-content">
+                            <h2 class="dz-title counter m-b0">{{area}}</h2>
+                            <p class="font-20">Reachable Areas</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                    <div class="icon-bx-wraper style-2 m-b30 text-center">
+                        <div class="icon-bx-lg">
+                            <i class="fa-solid fa-comment icon-cell"></i>
+                        </div>
+                        <div class="icon-content">
+                            <h2 class="dz-title counter m-b0">{{feedback}}</h2>
+                            <p class="font-20">Given Feedback</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Feature Box End -->
+</div>
+
+
+{% endblock %}

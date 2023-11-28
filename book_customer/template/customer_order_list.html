@@ -1,0 +1,88 @@
+{% extends 'customer_header.html' %}
+{% load static %}
+{% block content %}
+
+<div class="page-content">
+    <!-- inner page banner -->
+    <div class="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm"
+         style="background-image:url({% static 'images/background/bg3.jpg' %});">
+        <div class="container">
+            <div class="dz-bnr-inr-entry">
+                <h1>Order</h1>
+                <nav aria-label="breadcrumb" class="breadcrumb-row">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html"> Home</a></li>
+                        <li class="breadcrumb-item">Order</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- inner page banner End-->
+
+    <!-- contact area -->
+    <section class="content-inner shop-account">
+        <!-- Product -->
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-12">
+                    <div class="table-responsive">
+                        <table style="text-align:center" class="table check-tbl">
+
+                            <thead>
+                                    <tr>
+                                        <th>User Name</th>
+                                        <th>Order Date</th>
+                                        <th>Order Status</th>
+                                        <th>Payment Status</th>
+                                        <th>Total</th>
+                                        <th>See Order List</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for data in o %}
+
+                                    <tr>
+                                        <td><i class="fas fa-user"></i> {{data.u_id.u_fname}} {{data.u_id.u_lname}}</td>
+                                        <td>{{data.o_date}}</td>
+                                        <td>
+                                            {% if data.o_status == 1 %}
+                                                <span class="badge badge-success">ACCEPTED</span>
+                                            {% elif data.o_status == 2 %}
+                                                <span class="badge badge-danger">REJECTED</span>
+                                            {% else %}
+                                                <span class="badge badge-warning">PENDING</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if data.payment_status == 1 %}
+                                                <span class="badge badge-primary">Online payment</span>
+                                            {% elif data.payment_status == 2 %}
+                                                <span class="badge badge-secondary">Cash on delivery</span>
+                                            {% endif %}
+                                        </td>
+
+                                        <td>
+                                           ₹ {{data.total_amount}}
+                                        </td>
+
+                                        <td>
+                                            <a href="/c/c_orderdetails1/{{data.o_id}}" title="Details"><i class="fas fa-eye"></i></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Product END -->
+    </section>
+    <!-- contact area End-->
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends 'admin_header.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Main Content -->
+<div class="main-content">
+    <section class="section">
+        <div class="section-header">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="section-header-breadcrumb-content-chart float-right">
+                        <h1>Book</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-body">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Update Book Details</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                            </div>
+
+
+                            <form method="post" action="/update_book/{{bid.b_id}}">
+                                {% csrf_token %}
+                                <div class="card-body">
+                                    <div class="row">
+
+                                        <div class="col-lg-4 col-md-12 col-sm-12">
+                                            <div class="form-group">
+
+                                                <label>Book Name</label>
+                                                <input type="text" class="form-control" name="b_name" value="{{bid.b_name}}">
+
+                                                <br/>
+                                                <br/>
+
+                                                <label>Book Price</label>
+                                                <input type="text" class="form-control" name="b_price" value="{{bid.b_price}}">
+
+                                                <br/>
+                                                <br/>
+
+
+                                                <label>Book Quantity</label>
+                                                <input type="text" class="form-control" name="b_qty" value="{{bid.b_qty}}">
+
+                                                <br/>
+                                                <br/>
+
+
+                                                <label>Book Description</label>
+                                                <textarea class="form-control" name="b_des">{{bid.b_des}}</textarea>
+
+                                                <br/>
+                                                <br/>
+
+                                                <input type="hidden" class="form-control" name="is_available" value="{{bid.is_available}}">
+
+
+                                                <label>Sub-Category Name</label>
+                                                <select class="form-control" name="s_id">
+                                                    {% for val in sub_category %}
+
+                                                    <option value="{{val.s_id}}" {% if val.s_id == bid.s_id_id %} selected {% endif %}>{{val.s_name}}</option>
+
+                                                    {% endfor %}
+                                                </select>
+
+                                                <br/>
+                                                <br/>
+
+                                                <label>Language Name</label>
+                                                <select class="form-control" name="l_id">
+                                                    {% for val in language %}
+
+                                                    <option value="{{val.l_id}}" {% if val.l_id == bid.l_id_id %} selected {% endif %}>{{val.l_name}}</option>
+
+                                                    {% endfor %}
+                                                </select>
+
+                                                <br/>
+                                                <br/>
+
+                                                <input type="submit" class="btn btn-primary">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

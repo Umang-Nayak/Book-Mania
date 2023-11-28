@@ -1,0 +1,146 @@
+{% extends 'customer_header.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Content -->
+<div class="page-content bg-white">
+    <!-- contact area -->
+    <div class="content-block">
+        <!-- Browse Jobs -->
+        <section class="content-inner bg-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-4 m-b30">
+                        <div class="sticky-top">
+                            <div class="shop-account">
+                                <div>
+
+                                </div>
+                                <ul class="account-list">
+                                    <li>
+                                        <a href="/c/cprofile/" class="active"><i class="far fa-user"
+                                                                                    aria-hidden="true"></i>
+                                            <span>Profile</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="/c/cart/"><i class="flaticon-shopping-cart-1"></i>
+                                            <span>My Cart</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="/c/cwishlist/"><i class="far fa-heart" aria-hidden="true"></i>
+                                            <span>Wishlist</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="/c/new_book1/"><i class="fa fa-briefcase"
+                                                                          aria-hidden="true"></i>
+                                            <span>Shop</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="/c/logout"><i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                                            <span>Log Out</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-8 m-b30">
+                        <div class="shop-bx shop-profile">
+                            <div class="shop-bx-title clearfix">
+                                <h5 class="text-uppercase">Basic Information</h5>
+                            </div>
+                            <form method="post" action="/c/cprofile/">
+                                {% csrf_token %}
+                                <div class="row m-b30">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="mb-3">
+                                            <label for="formcontrolinput1" class="form-label">First Name:</label>
+                                            <input type="text" class="form-control" id="formcontrolinput1"
+                                                   value="{{uid.u_fname}}" name="u_fname">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="mb-3">
+                                            <label for="formcontrolinput3" class="form-label">Last Name:</label>
+                                            <input type="text" class="form-control" id="formcontrolinput3"
+                                                   name="u_lname" value="{{uid.u_lname}}">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="shop-bx-title clearfix">
+                                    <h5 class="text-uppercase">Contact Information</h5>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="mb-3">
+                                            <label for="formcontrolinput5" class="form-label">Contact Number:</label>
+                                            <input type="text" class="form-control" id="formcontrolinput5"
+                                                   name="u_contact" value="{{uid.u_contact}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="mb-3">
+                                            <label for="formcontrolinput6" class="form-label">Email Address:</label>
+                                            <input type="text" class="form-control" id="formcontrolinput6"
+                                                   name="u_email" value="{{uid.u_email}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="mb-4">
+                                            <label for="formcontrolinput10" class="form-label">Full Address:</label>
+                                            <input type="text" class="form-control" id="formcontrolinput10"
+                                                   name="u_address" value="{{uid.u_address}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="submit" class="btn btn-primary">
+                            </form>
+                        </div>
+                        <div class="col-xl-9 col-lg-8 m-b30">
+                            <div class="shop-bx shop-profile">
+                                <div class="shop-bx-title clearfix">
+                                    <h5 class="text-uppercase">Change Password</h5>
+                                </div>
+                                <form method="post" action="/c/customer_update_pass/">
+                                    {% csrf_token %}
+                                    <div class="row m-b30">
+
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="mb-3">
+                                                <label for="formcontrolinput1" class="form-label">Current Password</label>
+                                                <input type="password" class="form-control" id="formcontrolinput11"
+                                                       value="" name="">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="mb-3">
+                                                <label for="formcontrolinput3" class="form-label">New Password</label>
+                                                <input type="password" class="form-control" id="formcontrolinput12"
+                                                       name="pass" value="">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="mb-3">
+                                                <label for="formcontrolinput3" class="form-label">Confirm Password</label>
+                                                <input type="password" class="form-control" id="formcontrolinput13"
+                                                       name="cpass" value="">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <input type="submit" class="btn btn-primary">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Browse Jobs END -->
+    </div>
+</div>
+<!-- Content END-->
+{% endblock %}

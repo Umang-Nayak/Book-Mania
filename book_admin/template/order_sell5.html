@@ -1,0 +1,100 @@
+{% extends 'admin_header.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Main Content -->
+<div class="main-content">
+    <section class="section">
+        <div class="section-header">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="section-header-breadcrumb-chart float-right">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Area wise User Report</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <form method="POST" action="/od_report5/">
+                                    {% csrf_token %}
+                                    <table>
+                                        <tr>
+                                            <th>
+                                                Area Name
+                                            </th>
+
+                                        </tr>
+                                        <tr>
+
+                                            <td>
+                                                <select class="form-control" name="a_id">
+                                                    {% for val in area %}
+
+                                                    <option value="{{val.a_id}}">{{val.a_name}}</option>
+
+                                                    {% endfor %}
+                                                </select>
+                                            </td>
+
+                                            <td>
+
+                                                <input type="submit" class="btn btn-primary">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                                    <thead>
+                                    <tr>
+                                        <th>User ID</th>
+                                        <th>User First Name</th>
+                                        <th>User Last Name</th>
+                                        <th>User Contact</th>
+                                        <th>User Address</th>
+                                        <th>User E-mail</th>
+                                        <th>User Password</th>
+                                        <th>is_admin</th>
+                                        <th>Area Name</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for data in user %}
+
+                                    <tr>
+                                        <td>{{data.u_id}}</td>
+                                        <td>{{data.u_fname}}</td>
+                                        <td>{{data.u_lname}}</td>
+                                        <td>{{data.u_contact}}</td>
+                                        <td>{{data.u_address}}</td>
+                                        <td>{{data.u_email}}</td>
+                                        <td>{{data.u_password}}</td>
+                                        <td>{{data.is_admin}}</td>
+                                        <td>{{data.a_id.a_name}}</td>
+                                    </tr>
+
+                                    {% endfor %}
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

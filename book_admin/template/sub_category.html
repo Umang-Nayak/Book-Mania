@@ -1,0 +1,65 @@
+{% extends 'admin_header.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Main Content -->
+<div class="main-content">
+    <section class="section">
+        <div class="section-header">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="section-header-breadcrumb-content-chart float-right">
+                        <h1>Sub-category</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Sub-category Table</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                                    <thead>
+                                    <tr>
+                                        <th>Sub_category ID</th>
+                                        <th>Sub_category Name</th>
+                                        <th>Sub_category Description</th>
+                                        <th>Category Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% for data in s %}
+
+                                    <tr>
+                                        <td>{{data.s_id}}</td>
+                                        <td>{{data.s_name}}</td>
+                                        <td>{{data.s_des}}</td>
+                                        <td>{{data.c_id.c_name}}</td>
+                                        <td>
+                                            <a href="/d_sub_category/{{data.s_id}}"><i class="fas fa-trash"></i></a>
+                                            &nbsp; /&nbsp;
+                                            <a href="/update_sub_category/{{data.s_id}}"><i class="fas fa-sync-alt"></i></a>
+                                        </td>
+                                    </tr>
+
+                                    {% endfor %}
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="/si/" class="badge badge-primary">Insert Data</a>
+    </section>
+</div>
+{% endblock %}

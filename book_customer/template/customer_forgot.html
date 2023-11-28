@@ -1,0 +1,68 @@
+{% extends 'customer_header.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<!-- Header End -->
+
+<div class="page-content">
+    <!-- inner page banner -->
+    <div class="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm"
+         style="background-image:url({% static 'images/background/bg3.jpg' %});">
+        <div class="container">
+            <div class="dz-bnr-inr-entry">
+                <h1>Reset Password</h1>
+            </div>
+        </div>
+    </div>
+    <!-- inner page banner End-->
+
+    <!-- contact area -->
+    <section class="content-inner shop-account">
+        <!-- Product -->
+        <div class="container">
+            <div class="row">
+                <center>
+                <div class="col-lg-6 col-md-6 mb-4">
+                    <div class="login-area">
+                        <div class="tab-content nav">
+
+                            <form id="login" class="tab-pane active col-12" method="POST"
+                                  action="/c/c_otp/">
+
+                                {% csrf_token %}
+
+
+                                <div class="mb-4">
+                                    <label class="label-title">E-MAIL *</label>
+                                    <input name="cemail" id="cemail" required="" value="{{customer_email_cookie}}"
+                                           class="form-control" placeholder="Your Email Id" type="email">
+                                </div>
+
+
+                                <div class="text-left">
+                                    <button class="btn btn-primary btnhover me-2" type="submit">Forgot Password</button>
+                                </div>
+
+                                {% for data in messages %}
+
+                                <span style="color:red"> {{data}} </span>
+
+                                {% endfor %}
+
+
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+                    </center>
+            </div>
+        </div>
+        <!-- Product END -->
+    </section>
+    <!-- contact area End-->
+</div>
+{% endblock %}

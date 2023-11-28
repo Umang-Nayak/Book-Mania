@@ -1,0 +1,225 @@
+{% extends 'customer_header.html' %}
+{% load static %}
+{% load mathfilters %}
+{% block content %}
+{% load cart_tag %}
+
+
+<div class="page-content bg-grey">
+    <section class="content-inner-1">
+        <div class="container">
+            <div class="row book-grid-row style-4 m-b60">
+
+
+                <div class="col">
+                    <div class="dz-box">
+                        <div class="dz-media">
+                            <img src="{% static 'assets/img/' %}{{book.b_img}}" alt="book">
+                        </div>
+
+
+                        <div class="dz-content">
+                            <div class="dz-header">
+                                <h3 class="title">{{book.b_name}}</h3>
+                            </div>
+
+
+                            <div class="dz-body">
+                                <div class="book-detail">
+                                    <ul class="book-info">
+                                        <li>
+                                            <div class="writer-info">
+                                                <div>
+                                                    <span>Owner</span>
+                                                    {% if book.u_id == None %}
+                                                    New Book
+                                                    {% else %}
+                                                    {{book.u_id.u_fname}}&nbsp;{{book.u_id.u_lname}}
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li><span>Available Quantity</span>{{book.b_qty}}</li>
+                                        <li><span>Language</span>{{book.l_id.l_name}}</li>
+                                    </ul>
+                                </div>
+
+                                <div class="book-detail">
+                                    <ul class="book-info">
+
+                                        <li>
+                                            <h6 style="color:orange">Type</h6>
+                                            <p>{{book.s_id.s_name}}</p>
+                                        </li>
+                                        <li>
+                                            <h6 style="color:orange">Description</h6>
+                                            <p>{{book.b_des}}</p>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="book-footer">
+
+                                    <ul>
+                                        <li>
+                                            <div class="price">
+                                                <h5>₹ {{book.b_price}}</h5>
+                                                <input type="hidden" name="price" value="{{book.b_price}}"/>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            {% if book.u_id.u_fname == request.session.customer_fname %}
+
+                                            <h3><span style="color:red">You can't buy your own Book <i
+                                                    class="fas fa-cancel"></i></span></h3>
+
+                                            {% else %}
+                                        </li>
+                                    </ul>
+                                    <div class="form-group m-b25">
+                                        <form method="POST" action="/c/c_checkout/">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="b_id" value="{{book.b_id}}">
+                                            <input type="hidden" name="price" value="{{book.b_price}}">
+                                            <input class="btn btn-primary btnhover" value="Proceed to Checkout"
+                                                   type="submit">
+                                        </form>
+                                    </div>
+
+                                    {% endif %}
+
+
+                                    <form method="POST" action="/c/cl_wishlist/">
+                                        {% csrf_token %}
+                                        <div class="bookmark-btn style-2">
+                                            <input type="hidden" name="b_id" value="{{book.b_id}}">
+                                            <button type="submit" class="form-check-label">
+                                                {% if book.b_id in w %}
+                                                <i class='fas fa-heart' style='color: red'></i>
+                                                {% else %}
+                                                <i class="flaticon-heart"></i>
+                                                {% endif %}
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="product-description tabs-site-button">
+                    <ul class="nav nav-tabs">
+                        <li><a data-bs-toggle="tab" href="#graphic-design-1" class="active">Details Product</a></li>
+                        <li><a data-bs-toggle="tab" href="#developement-1">Customer Reviews</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="graphic-design-1" class="tab-pane show active">
+                            <table class="table border book-overview">
+                                <tr>
+                                    <th>Book Title</th>
+                                    <td>{{book.b_name}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Edition Language</th>
+                                    <td>{{book.l_id.l_name}}</td>
+                                </tr>
+                                <tr class="tags">
+                                    <th>Type</th>
+                                    <td>
+                                        {{book.s_id.s_name}}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="developement-1" class="tab-pane">
+                            <div class="clear" id="comment-list">
+                                <div class="post-comments comments-area style-1 clearfix">
+                                    <h4 class="comments-title">{{count}} Comment</h4>
+                                    {% for data in feed %}
+                                    <div id="comment">
+                                        <ol class="comment-list">
+                                            <li class="comment even thread-even depth-1 comment" id="comment-2">
+                                                <div class="comment-body">
+                                                    <div class="comment-author vcard">
+                                                        <img src="{% static 'assets/img/users/orange_user.png' %}"
+                                                             alt=""
+                                                             class="avatar"/>
+                                                        <cite class="fn">{{data.u_id.u_fname}}
+                                                            {{data.u_id.u_lname}}</cite> <span
+                                                            class="says">says:</span>
+                                                    </div>
+                                                    <div class="comment-content dlab-page-text">
+                                                        <p>{{data.f_des}}</p>
+                                                    </div>
+                                                    <div class="reply">
+                                                        Date :- {{data.f_date}}
+                                                    </div>
+                                                </div>
+
+                                            </li>
+
+
+                                        </ol>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="default-form comment-respond style-1" id="respond">
+                                        <h4 class="comment-reply-title" id="reply-title">LEAVE A REPLY <small> <a
+                                                rel="nofollow" id="cancel-comment-reply-link" href="javascript:void(0)"
+                                                style="display:none;">Cancel reply</a> </small></h4>
+                                        <div class="clearfix">
+                                            <form method="post" id="comments_form" class="comment-form"
+                                                  action="\c\feed_insert\">
+                                                {% csrf_token %}
+
+                                                <p class="comment-form-email">
+                                                    <input id="b_id"
+                                                           required="required"
+                                                           placeholder="Email"
+                                                           name="b_id"
+                                                           type="hidden"
+                                                           value="{{book.b_id}}">
+                                                </p>
+                                                <p class="comment-form-comment">
+                                                    <textarea id="f_des"
+                                                              placeholder="Enter your comment Here"
+                                                              class="form-control4"
+                                                              name="f_des"
+                                                              cols="45"
+                                                              rows="3"
+                                                              required="required">
+
+                                                    </textarea>
+                                                </p>
+                                                <p class="col-md-12 col-sm-12 col-xs-12 form-submit">
+                                                    <button id="submit"
+                                                            type="submit"
+                                                            class="submit btn btn-primary filled">
+
+                                                        Submit Now
+
+                                                        <i class="fa fa-angle-right m-l10"></i>
+                                                    </button>
+                                                </p>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+{% endblock %}

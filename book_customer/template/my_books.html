@@ -1,0 +1,115 @@
+{% extends 'customer_header.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-content bg-grey">
+    <div class="content-inner-1 border-bottom">
+        <div class="container">
+            <div class="row ">
+                <div class="col-xl-9">
+                    {% if total > 0 %}
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="title">My Books</h4>
+                    </div>
+                    {% for x in book %}
+                    <div class="col-md-12 col-sm-12">
+                        <div class="dz-shop-card style-2">
+                            <div class="dz-media">
+                                <img src="{% static 'assets/img/' %}{{x.b_img}}" alt="book">
+                            </div>
+                            <div class="dz-content">
+                                <div class="dz-header">
+                                    <div>
+                                        <h4 class="title mb-0"><a href="/c/cdetail/{{x.b_id}}">{{x.b_name}}</a></h4>
+                                    </div>
+                                    <div class="price">
+                                        &emsp; &emsp; &emsp;<span class="price-num text-primary">₹ {{x.b_price}}</span>
+                                    </div>
+                                </div>
+                                <div class="dz-body">
+                                        <div>
+                                            <p class="dz-para">{{x.b_des}}</p>
+                                        </div>
+                                        <br/>
+                                        <br/>
+                                        <div class="review-num">
+                                            <span class="price-num text-primary">{{x.s_id.s_name}}</span>
+                                            <h6><i class="fas fa-user"></i> &nbsp; {{x.u_id.u_fname}} {{x.u_id.u_lname}}</h6>
+                                        </div>
+                                    <div class="rate">
+                                        <div class="d-flex">
+                                            <form method="post" action="/c/insert_cart/{{x.b_id}}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="b_id" value="{{x.b_id}}">
+                                                <input type="hidden" name="b_qty" value="1">
+                                                <input type="hidden" name="price" value="{{x.b_price}}"/>
+
+                                                <a href="/c/cdetail/{{x.b_id}}"
+                                                   class="btn btn-secondary btnhover btnhover2">
+                                                    Book Detail
+                                                </a>
+                                            </form>
+                                                <div class="bookmark-btn style-2">
+                                                    <button type="submit" class="form-check-label">
+                                                        <a href="/c/d_used_book/{{x.b_id}}"><i style="color:#0000CF" class="fa fa-trash"></i></a>
+                                                    </button>
+                                                </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+                    {% else %}
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="title"><i class="fa-solid fa-ban fa-beat-fade"> No  Books  Here </i></h4>
+                        <span class="price-num text-primary">
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <br/>
+                            If you want to add your book,
+                            <br/>
+                            just click on this link at the right side <i class="fas fa-smile"></i>
+                            <br/>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                            <i class="fa-regular fa-hand-point-right"></i>
+                        </span>
+                        <a href="/c/c_sell/" class="btn btn-secondary btnhover btnhover2">
+                                <i class="fa-solid fa-book fa-bounce"> Add  Book </i>
+                        </a>
+                    </div>
+
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

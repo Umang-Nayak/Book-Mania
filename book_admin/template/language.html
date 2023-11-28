@@ -1,0 +1,62 @@
+{% extends 'admin_header.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Main Content -->
+<div class="main-content">
+    <section class="section">
+        <div class="section-header">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="section-header-breadcrumb-content-chart float-right">
+                        <h1>Language</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Language Table</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                                    <thead>
+                                    <tr>
+                                        <th>Language ID</th>
+                                        <th>Language Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for data in l %}
+
+                                    <tr>
+                                        <td>{{data.l_id}}</td>
+                                        <td>{{data.l_name}}</td>
+                                        <td>
+                                            <a href="/d_language/{{data.l_id}}"><i class="fas fa-trash"></i></a>
+                                            &nbsp; /&nbsp;
+                                            <a href="/update_language/{{data.l_id}}"><i class="fas fa-sync-alt"></i></a>
+                                        </td>
+                                    </tr>
+
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="/li/" class="badge badge-primary">Insert Data</a>
+    </section>
+</div>
+
+{% endblock %}

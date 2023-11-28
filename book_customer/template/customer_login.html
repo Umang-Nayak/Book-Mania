@@ -1,0 +1,109 @@
+{% extends 'customer_header.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<!-- Header End -->
+
+<div class="page-content">
+    <!-- inner page banner -->
+    <div class="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm"
+         style="background-image:url({% static 'images/background/bg3.jpg' %});">
+        <div class="container">
+            <div class="dz-bnr-inr-entry">
+                <h1>Login</h1>
+                <nav aria-label="breadcrumb" class="breadcrumb-row">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% static 'index.html' %}"> Home</a></li>
+                        <li class="breadcrumb-item">Login</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- inner page banner End-->
+
+    <!-- contact area -->
+    <section class="content-inner shop-account">
+        <!-- Product -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 mb-4">
+                    <div class="login-area">
+                        <div class="tab-content">
+                            <h4>NEW CUSTOMER</h4>
+                            <p>By creating an account with our store, you will be able to move through the checkout
+                                process faster, store multiple shipping addresses, view and track your orders in your
+                                account and more.</p>
+                            <a class="btn btn-primary btnhover m-r5 button-lg radius-no" href="/c/creg/">CREATE
+                                AN ACCOUNT</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 mb-4">
+                    <div class="login-area">
+                        <div class="tab-content nav">
+
+
+                            <form id="login" class="tab-pane active col-12" method="POST"
+                                  action="/c/clogin/">
+                                {% csrf_token %}
+                                <h4 class="text-secondary">LOGIN</h4>
+                                <p class="font-weight-600">If you have an account with us, please log in.</p>
+
+                                <div class="mb-4">
+                                    <label class="label-title">E-MAIL *</label>
+                                    <input name="email" id="email" required="" value="{{customer_password_cookie}}"
+                                           class="form-control" placeholder="Your Email Id" type="email">
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="label-title">PASSWORD *</label>
+                                    <input name="password" id="password" required=""
+                                           value="{{customer_password_cookie}}" class="form-control "
+                                           placeholder="Type Password" type="password">
+                                </div>
+
+                                <div class="text-left">
+                                    <button class="btn btn-primary btnhover me-2" type="submit">login</button>
+                                    <a href="/c/c_forgot/" class="m-l5"><i
+                                            class="fas fa-unlock-alt"></i> Forgot Password</a>
+                                </div>
+                                {% for data in messages %}
+                                <span style="color:red"> {{data}} </span>
+                                {% endfor %}
+                            </form>
+
+
+                            <form id="forgot-password" class="tab-pane fade  col-12" action="/c/cotp/">
+                                <h4 class="text-secondary">FORGET PASSWORD ?</h4>
+                                <p class="font-weight-600">We will email you to reset your password.</p>
+                                <div class="mb-3">
+                                    <label class="label-title">E-MAIL *</label>
+                                    <input name="cemail" required="" class="form-control"
+                                           placeholder="Your Email Id" type="email" value="{{customer_email_cookie}}">
+                                </div>
+                                <div class="text-left">
+                                    <a class="btn btn-outline-secondary btnhover m-r10" data-bs-toggle="tab"
+                                       href="#login">Back</a>
+                                    <button class="btn btn-primary btnhover">Submit</button>
+                                </div>
+
+                                {% for data in messages %}
+
+                                <span style="color:red"> {{data}} </span>
+
+                                {% endfor %}
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Product END -->
+    </section>
+    <!-- contact area End-->
+</div>
+{% endblock %}
