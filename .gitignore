@@ -8,6 +8,8 @@ media
 
 staticfiles/
 accounts_engine/migrations/
+book_customer/migrations/
+book_admin/migrations/
 education_materials/
 insights_image/
 offersevents_image/
