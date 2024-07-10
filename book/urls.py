@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^api/chart/data/$', ChartData.as_view(), name='api-data'),
 
     path('admin/', admin.site.urls),
+    path('', views.show_dashboard),
     path('show/', views.show),
     path('area/', views.show_area),
     path('user/', views.show_user),

@@ -93,7 +93,7 @@
                                                 <select class="form-control" name="s_id">
                                                     {% for val in sub_category %}
 
-                                                    <option value="{{val.s_id}}">{{val.s_name}}</option>
+                                                    <option value="{{val.s_id}}">{{val.c_id.c_name}} - {{val.s_name}}</option>
 
                                                     {% endfor %}
                                                 </select>

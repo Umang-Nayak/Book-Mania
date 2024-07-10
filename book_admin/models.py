@@ -4,11 +4,14 @@ from django.db import models
 # Create your models here.
 class Area(models.Model):
     a_id = models.AutoField(primary_key=True)
-    a_name = models.CharField(max_length=20)
-    a_pincode = models.IntegerField(unique=True)
+    a_name = models.CharField(max_length=100)
+    a_pincode = models.IntegerField()
 
     class Meta:
         db_table = "area"
+
+    def __str__(self):
+        return f"{self.a_name} - {self.a_pincode}"
 
 
 class User(models.Model):
@@ -27,14 +30,20 @@ class User(models.Model):
     class Meta:
         db_table = "user"
 
+    def __str__(self):
+        return f"{self.u_email}"
+
 
 class Category(models.Model):
     c_id = models.AutoField(primary_key=True)
     c_name = models.CharField(max_length=20)
-    c_des = models.CharField(max_length=500)
+    c_des = models.CharField(max_length=1000)
 
     class Meta:
         db_table = "category"
+
+    def __str__(self):
+        return f"{self.c_name}"
 
 
 class Sub_category(models.Model):
@@ -46,6 +55,9 @@ class Sub_category(models.Model):
     class Meta:
         db_table = "sub_category"
 
+    def __str__(self):
+        return f"{self.c_id.c_name} - {self.s_name}"
+
 
 class Language(models.Model):
     l_id = models.AutoField(primary_key=True)
@@ -53,6 +65,9 @@ class Language(models.Model):
 
     class Meta:
         db_table = "language"
+
+    def __str__(self):
+        return f"{self.l_name}"
 
 
 class Book(models.Model):
@@ -70,6 +85,9 @@ class Book(models.Model):
     class Meta:
         db_table = "book"
 
+    def __str__(self):
+        return f"{self.b_name}"
+
 
 class Order(models.Model):
     o_id = models.AutoField(primary_key=True)
@@ -81,6 +99,9 @@ class Order(models.Model):
 
     class Meta:
         db_table = "order"
+
+    def __str__(self):
+        return f"{self.u_id.u_email} | {self.o_date} | {self.o_status}"
 
 
 class Order_detail(models.Model):
@@ -94,6 +115,9 @@ class Order_detail(models.Model):
     class Meta:
         db_table = "order_detail"
 
+    def __str__(self):
+        return f"{self.b_id.b_name} | {self.Amount}"
+
 
 class Wishlist(models.Model):
     w_id = models.AutoField(primary_key=True)
@@ -102,6 +126,9 @@ class Wishlist(models.Model):
 
     class Meta:
         db_table = "wishlist"
+
+    def __str__(self):
+        return f"{self.b_id.b_name} - {self.u_id.u_email}"
 
 
 class Feedback(models.Model):
@@ -114,6 +141,9 @@ class Feedback(models.Model):
     class Meta:
         db_table = "feedback"
 
+    def __str__(self):
+        return f"{self.b_id.b_name} - {self.u_id.u_email} - {self.f_des}"
+
 
 class Cart(models.Model):
     cart_id = models.AutoField(primary_key=True)
@@ -125,3 +155,6 @@ class Cart(models.Model):
 
     class Meta:
         db_table = "cart"
+
+    def __str__(self):
+        return f"{self.b_id.b_name} - {self.u_id.u_email} - {self.amount}"

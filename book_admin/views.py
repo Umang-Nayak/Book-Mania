@@ -592,8 +592,12 @@ def update_pass(request):
 def order_report1(request):
     if 'admin_id' in request.session:
         # sql = "SELECT 1 as o_item_id, (SELECT product.p_name as name FROM product WHERE p_id = order_item.p_id_id) as name,sum(o_item_amount) as total FROM order_item JOIN product on order_item.o_item_id = product.p_id GROUP BY p_id_id;"
-        sql = "SELECT 1 as od_id, b.b_name as name, sum(Amount) as total FROM order_detail i JOIN book b where b.b_id = i.b_id_id GROUP by b_id_id"
-        od = Order_detail.objects.raw(sql)
+        # sql = "SELECT 1 as od_id, b.b_name as name, sum(Amount) as total FROM order_detail i JOIN book b where b.b_id = i.b_id_id GROUP by b_id_id"
+        # od = Order_detail.objects.raw(sql)
+
+        order_details = Order_detail.objects.values('b_id__b_name').annotate(total=Sum('Amount'))
+        od = [{'od_id': 1, 'name': detail['b_id__b_name'], 'total': detail['total']} for detail in order_details]
+
         return render(request, "order_sell.html", {'order': od})
     else:
         return render(request, "login.html")

@@ -1,0 +1,9 @@
+Django==5.0.6
+python-dotenv==1.0.1
+cart==1.2.2
+django-mathfilters==1.0.0
+django-parsley==0.7
+psycopg2==2.9.9
+djangorestframework==3.15.2
+razorpay==1.4.2
+pandas==2.2.2
